@@ -15,6 +15,17 @@
   <div class="group">
     <%= f.input :quantity %>
   </div>
+  <br>
+
+  <% if @product.image.present? %>
+  <span>目前产品图</span>
+  <br>
+  <%= image_tag(@product.image.medium.url) %>
+  <% end %>
+
+  <div class="group">
+    <%= f.input :image, as: :file %>
+  </div>
 
   <%= f.submit "submit", data:{disable_with: "submitting"} %>
 

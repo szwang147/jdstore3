@@ -1,0 +1,15 @@
+<div class="row">
+  <% @products.each do |product| %>
+    <div class="col-xs-6 col-md-3">
+      <%= link_to product_path(product) do %>
+        <% if product.image.present? %>
+          <%= image_tag(product.image.thumb.url, class:"thumbnail") %>
+        <% else %>
+          <%= image_tag("http://img1.gamersky.com/image2016/07/20160715_gxh_289_5/gamersky_01small_02_2016715912313.jpg",
+          style:"height: 200px; width: 200px;",  class:"thumbnail") %>
+        <% end %>
+      <% end %>
+      <%= product.title %> $ <%= product.price %>
+    </div>
+  <% end %>
+</div>

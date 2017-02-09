@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
+  <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <a class="navbar-brand" href="/">JD-Store </a>
@@ -13,6 +13,12 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%= link_to "#" do %>
+              购物车 <i class="fa fa-shopping-cart"></i> (<%= current_cart.products.count %>)
+              <% end %>
+            </li>
+
               <% if !current_user %>
                 <li><%= link_to(content_tag(:i,"注册",class:"fa fa-user-plus"), new_user_registration_path) %> </li>
                 <li><%= link_to(content_tag(:i, "登入",class:"fa fa-sign-in"), new_user_session_path) %></li>
@@ -28,8 +34,9 @@
                       <%= link_to("Admin 后台控制", admin_products_path) %>
                     </li>
                     <% end %>
-                <li> <%= link_to(content_tag(:i, "登出",class:"fa fa-sign-out"),
-                       destroy_user_session_path, method: :delete) %> </li>
+                    <li> <%= link_to(content_tag(:i, "登出",class:"fa fa-sign-out"),
+                       destroy_user_session_path, method: :delete) %>
+                    </li>
                   </ul>
                 </li>
               <% end %>

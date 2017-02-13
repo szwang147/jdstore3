@@ -1,0 +1,36 @@
+<div>
+  <br>
+  <% if @products.blank? %>
+    <br>
+    <h2 class="search-info-title">没有相关内容，请重新搜索</h2>
+  <% else %>
+    <h2 class="search-info-title"> 以下是搜索"<%= @query_string %>"得到的内容 </h2>
+    <h4 class="text-left" style="margin-top: 30px;"> 找到相关结果 <%= @products.count %> 个</h4>
+    <hr>
+    <div class="search-result">
+
+      <div class="job-table">
+        <% @products.each do |product| %>
+        <div class="col-xs-6 col-md-12">
+
+            <div class="pull-right">
+            </div>
+            <div class="col-md-3">
+              <% if product.image.present? %>
+              <%= image_tag(product.image.medium.url, class:"thumbnail") %>
+              <% else %>
+              <%= image_tag("http://img1.gamersky.com/image2016/07/20160715_gxh_289_5/gamersky_01small_02_2016715912313.jpg",
+              style:"height: 300px; width: 400px;",  class:"thumbnail") %>
+              <% end %>
+              <p><%= link_to(render_highlight_content(product, @query_string),product_path(product)) %></p>
+
+            </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="text-center">
+      <%= will_paginate(@products, renderer: BootstrapPagination::Rails) %>
+    </div>
+  <% end %>
+</div>

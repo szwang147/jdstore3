@@ -52,7 +52,13 @@
         <% end %>
       </div>
 
-      <% if !@order.is_paid? %>
+      <% if @order.order_cancelled? && @order.is_paid == true %>
+      <p class="text-center"> 此单已经支付，并且取消，请等待退款 </p>
+
+      <% elsif @order.order_cancelled? && !@order.is_paid == true %>
+      <p class="text-center"> 此单未支付，并且取消，请重新下单 </p>
+
+      <% elsif @order.order_placed? == true %>
       <div class="group pull-right">
         <%= link_to("支付宝支付", pay_with_alipay_order_path(@order.token), method: :post, class:"btn btn-lg btn-danger",
         data:{ confirm:"请确认 支付#{@order.total}元"}) %>

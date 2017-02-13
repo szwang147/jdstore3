@@ -33,7 +33,7 @@ class Order < ApplicationRecord
     state :order_cancelled
 
     event :make_payment, after_commit: :pay! do
-      transitions from: :order_placed, to: :paid
+      transitions from: [:order_placed], to: :paid
     end
     event :ship do
       transitions from: :paid, to: :shipping
